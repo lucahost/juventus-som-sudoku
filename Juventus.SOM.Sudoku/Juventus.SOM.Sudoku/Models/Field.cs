@@ -10,12 +10,14 @@ namespace Juventus.SOM.Sudoku.Models
         public int Y { get; set; }
 
         public int Value { get; set; }
+        public bool Predefined { get; set; }
 
         public Field(int x, int y, int value = -1)
         {
             X = x;
             Y = y;
             Value = value;
+            Predefined = false;
         }
     }
 }
