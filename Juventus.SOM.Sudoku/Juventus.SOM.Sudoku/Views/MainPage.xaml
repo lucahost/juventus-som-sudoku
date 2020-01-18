@@ -1,32 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mvvm="http://prismlibrary.com"
-             xmlns:viewModels="clr-namespace:Juventus.SOM.Sudoku.ViewModels;assembly=Juventus.SOM.Sudoku"
              xmlns:views="clr-namespace:Juventus.SOM.Sudoku.Views;assembly=Juventus.SOM.Sudoku"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mvvm="http://prismlibrary.com"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance viewModels:MainPageViewModel}"
              mvvm:ViewModelLocator.AutowireViewModel="true"
-             x:Class="Juventus.SOM.Sudoku.MainPage">
+             x:Class="Juventus.SOM.Sudoku.Views.MainPage"
+             Title="{Binding Title}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Button Command="{Binding ReloadCommand}" 
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Text="Reload"
+                    Margin="0,10"
+                    HorizontalOptions="Center"/>
+            <Button Command="{Binding ValidateCommand}" 
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Margin="0,10"
+                    Text="Validate"
+                    HorizontalOptions="Center"/>
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="{Binding Title}" 
-           HorizontalOptions="Center"
-           VerticalOptions="Start" />
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2" 
+                   FontSize="20"
+                   Margin="0,10"
+                   HorizontalTextAlignment="Center"
+                   Text="{Binding OutputText}"/>
+        </Grid>
 
-        <views:GridView HorizontalOptions="FillAndExpand"
-                          VerticalOptions="FillAndExpand"
-                          RowSpacing="15"
-                          ColumnSpacing="15"
-                          MaxColumns="9"
-                          ItemsSource="{Binding Fields}"
-                          CommandParameter="{Binding .}"
-                          Command="{Binding TileClickCommand}"
-                          IsClippedToBounds="False">
-        </views:GridView>
-    </StackLayout>
+        <ActivityIndicator Grid.Row="1" 
+                           IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"/>
 
+        <Frame BackgroundColor="Black"
+               IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBooleanConverter}}"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Padding="10"
+               Grid.Row="1">
+            <views:GridView RowSpacing="4"
+                            Height="{Binding Source={RelativeSource Self}, Path=WidthRequest}"
+                            ColumnSpacing="0"
+                            MaxColumns="9"
+                            ItemsSource="{Binding Fields}"
+                            CommandParameter="{Binding .}"
+                            Command="{Binding TileClickCommand}"
+                            IsClippedToBounds="False">
+            </views:GridView>
+        </Frame>
+    </Grid>
 </ContentPage>

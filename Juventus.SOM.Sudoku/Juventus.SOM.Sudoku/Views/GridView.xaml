@@ -2,5 +2,8 @@
 
 <Grid xmlns="http://xamarin.com/schemas/2014/forms"
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-      x:Class="Juventus.SOM.Sudoku.Views.GridView">
+      x:Class="Juventus.SOM.Sudoku.Views.GridView"
+      BackgroundColor="DarkGray"
+      ColumnSpacing="3"
+      RowSpacing="2">
 </Grid>

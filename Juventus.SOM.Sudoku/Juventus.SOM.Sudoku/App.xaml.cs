@@ -1,5 +1,6 @@
 ﻿using Juventus.SOM.Sudoku.Services;
 using Juventus.SOM.Sudoku.ViewModels;
+using Juventus.SOM.Sudoku.Views;
 using Prism;
 using Prism.Ioc;
 using Xamarin.Forms;

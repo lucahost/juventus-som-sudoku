@@ -4,9 +4,12 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:converters="clr-namespace:Juventus.SOM.Sudoku.Converters;assembly=Juventus.SOM.Sudoku"
              mc:Ignorable="d"
              x:Class="Juventus.SOM.Sudoku.App">
     <Application.Resources>
-
+        <converters:InvertedBooleanConverter x:Key="InvertedBooleanConverter"/>
+        <converters:SudokuFieldValueConverter x:Key="SudokuFieldValueConverter"/>
+        <converters:SudokuFieldToBorderColorConverter x:Key="SudokuFieldToBorderColorConverter"/>
     </Application.Resources>
 </prism:PrismApplication>

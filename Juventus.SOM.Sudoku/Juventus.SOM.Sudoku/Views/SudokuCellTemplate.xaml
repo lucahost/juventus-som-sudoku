@@ -1,0 +1,14 @@
+﻿<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:behaviors="clr-namespace:Juventus.SOM.Sudoku.Behaviors;assembly=Juventus.SOM.Sudoku"
+      x:Class="Juventus.SOM.Sudoku.Views.SudokuCellTemplate">
+    <Entry Text="{Binding Value, Converter={StaticResource SudokuFieldValueConverter}}"
+           Keyboard="Numeric"
+           BackgroundColor="White"
+           HorizontalTextAlignment="Center"
+           IsEnabled="{Binding Predefined, Converter={StaticResource InvertedBooleanConverter}}">
+        <Entry.Behaviors>
+            <behaviors:SudokuFieldValueValidationBehavior/>
+        </Entry.Behaviors>
+    </Entry>
+</Grid>
