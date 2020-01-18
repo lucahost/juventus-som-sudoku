@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mvvm="http://prismlibrary.com"
+             xmlns:viewModels="clr-namespace:Juventus.SOM.Sudoku.ViewModels;assembly=Juventus.SOM.Sudoku"
+             mc:Ignorable="d"
+             mvvm:ViewModelLocator.AutowireViewModel="true"
+             d:BindingContext="{x:Type viewModels:MainPageViewModel}"
+             x:Class="Juventus.SOM.Sudoku.MainPage">
+
+    <StackLayout>
+        <!-- Place new controls here -->
+        <Label Text="{Binding Title}" 
+           HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand" />
+
+        <Grid
+    </StackLayout>
+
+</ContentPage>
