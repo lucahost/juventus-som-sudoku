@@ -51,14 +51,13 @@
 
         <Frame BackgroundColor="Black"
                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBooleanConverter}}"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="CenterAndExpand"
                Padding="10"
                Grid.Row="1">
             <views:GridView RowSpacing="4"
                             Height="{Binding Source={RelativeSource Self}, Path=WidthRequest}"
-                            ColumnSpacing="0"
-                            MaxColumns="9"
+                            ColumnSpacing="4"
                             ItemsSource="{Binding Fields}"
                             CommandParameter="{Binding .}"
                             Command="{Binding TileClickCommand}"

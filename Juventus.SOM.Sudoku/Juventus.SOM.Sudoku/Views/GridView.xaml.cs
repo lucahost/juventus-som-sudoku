@@ -15,11 +15,6 @@ namespace Juventus.SOM.Sudoku.Views
         public GridView()
         {
             InitializeComponent();
-
-            for (var i = 0; i < MaxColumns; i++)
-            {
-                ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-            }
         }
 
         public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create<GridView, object>(
@@ -41,13 +36,6 @@ namespace Juventus.SOM.Sudoku.Views
                 });
 
         public Type ItemTemplate { get; set; } = typeof(SudokuCellTemplate);
-
-
-        private int _maxColumns = 9;
-        public int MaxColumns {
-            get => _maxColumns;
-            set => _maxColumns = value;
-        }
 
         public object CommandParameter {
             get => GetValue(CommandParameterProperty);
@@ -73,33 +61,80 @@ namespace Juventus.SOM.Sudoku.Views
                 {
                     foreach (var item in items)
                     {
-                        Children.Remove(item);
+                        if (item is Grid grid)
+                        {
+                            if (grid.Children.Any())
+                            {
+                                grid.Children.Clear();
+                            }
+                        }
                     }
                 }
 
                 // Wipe out the previous row definitions if they're there.
-                RowDefinitions?.Clear();
+                //RowDefinitions?.Clear();
 
                 var enumerable = tiles as IList ?? tiles.ToList();
-                var numberOfRows = Math.Ceiling(enumerable.Count / (float)MaxColumns);
 
-                for (var i = 0; i < numberOfRows; i++)
-                    RowDefinitions?.Add(new RowDefinition { Height = GridLength.Star });
+                //for (var i = 0; i < numberOfRows; i++)
+                //    RowDefinitions?.Add(new RowDefinition { Height = GridLength.Star });
 
                 for (var index = 0; index < enumerable.Count; index++)
                 {
-                    var column = index % MaxColumns;
-                    var row = (int)Math.Floor(index / (float)MaxColumns);
-
                     var tile = BuildTile(enumerable[index]);
                     var item = enumerable[index];
                     if (item is Field field)
                     {
-                        Children?.Add(tile, field.Y - 1, field.X - 1);
+                        if (field.X < 3 && field.Y < 3)
+                        {
+                            Grid00.Children.Add(tile, field.Y, field.X);
+                            continue;
+                        }
+                        if (field.X < 3 && field.Y >= 3 && field.Y < 6)
+                        {
+                            Grid01.Children.Add(tile, field.Y - 3, field.X);
+                            continue;
+                        }
+                        if (field.X < 3 && field.Y >= 6 && field.Y < 9)
+                        {
+                            Grid02.Children.Add(tile, field.Y - 6, field.X);
+                            continue;
+                        }
+
+                        if (field.X >= 3 && field.X < 6 && field.Y < 3)
+                        {
+                            Grid10.Children.Add(tile, field.Y, field.X - 3);
+                            continue;
+                        }
+                        if (field.X >= 3 && field.X < 6 && field.Y >= 3 && field.Y < 6)
+                        {
+                            Grid11.Children.Add(tile, field.Y - 3, field.X - 3);
+                            continue;
+                        }
+                        if (field.X >= 3 && field.X < 6 && field.Y >= 6 && field.Y < 9)
+                        {
+                            Grid12.Children.Add(tile, field.Y - 6, field.X - 3);
+                            continue;
+                        }
+
+                        if (field.X >= 6 && field.X < 9 && field.Y < 3)
+                        {
+                            Grid20.Children.Add(tile, field.Y, field.X - 6);
+                            continue;
+                        }
+                        if (field.X >= 6 && field.X < 9 && field.Y >= 3 && field.Y < 6)
+                        {
+                            Grid21.Children.Add(tile, field.Y - 3, field.X - 6);
+                            continue;
+                        }
+                        if (field.X >= 6 && field.X < 9 && field.Y >= 6 && field.Y < 9)
+                        {
+                            Grid22.Children.Add(tile, field.Y - 6, field.X - 6);
+                            continue;
+                        }
                     }
                     else
                     {
-                        Children?.Add(tile, column, row);
                     }
                 }
             }
@@ -111,43 +146,6 @@ namespace Juventus.SOM.Sudoku.Views
         private Layout BuildTile(object item1)
         {
             var buildTile = (Grid)Activator.CreateInstance(ItemTemplate, item1);
-
-            //if (item1 is Field field)
-            //{
-            //    if (field.X % 3 == 0 && field.Y % 3 == 0)
-            //    {
-            //        var boxView = new BoxView
-            //        {
-            //            BackgroundColor = Color.Black,
-            //            Color = Color.Red,
-            //            HeightRequest = 0,
-            //            WidthRequest = 1
-            //        };
-            //        buildTile.Children.Insert(1, boxView);
-            //    }
-            //    else if (field.X % 3 == 0)
-            //    {
-            //        var boxView = new BoxView
-            //        {
-            //            BackgroundColor = Color.Black,
-            //            Color = Color.Red,
-            //            HeightRequest = 0,
-            //            WidthRequest = 1
-            //        };
-            //        buildTile.Children.Insert(1, boxView);
-            //    }
-            //    else if (field.Y % 3 == 0)
-            //    {
-            //        var boxView = new BoxView
-            //        {
-            //            BackgroundColor = Color.Black,
-            //            Color = Color.Red,
-            //            WidthRequest = 1,
-            //            HeightRequest = 0
-            //        };
-            //        buildTile.Children.Insert(1, boxView);
-            //    }
-            //}
 
             buildTile.InputTransparent = false;
 

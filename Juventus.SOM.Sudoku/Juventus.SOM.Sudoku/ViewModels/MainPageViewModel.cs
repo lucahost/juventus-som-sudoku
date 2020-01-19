@@ -89,6 +89,7 @@ namespace Juventus.SOM.Sudoku.ViewModels
 
         private async void Reload()
         {
+            OutputText = "";
             await InitGame();
         }
 
