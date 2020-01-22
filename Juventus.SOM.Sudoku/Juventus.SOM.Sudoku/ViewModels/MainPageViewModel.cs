@@ -12,7 +12,7 @@ using Prism.Navigation;
 
 namespace Juventus.SOM.Sudoku.ViewModels
 {
-    internal class MainPageViewModel : ViewModelBase
+    public class MainPageViewModel : ViewModelBase
     {
         private string _title;
         private string _outputText;

@@ -14,7 +14,26 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid>
+        <ActivityIndicator Grid.Row="0" 
+                           IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"/>
+
+        <Frame BackgroundColor="Black"
+               IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBooleanConverter}}"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="CenterAndExpand"
+               Padding="10"
+               Grid.Row="0">
+            <views:GridView RowSpacing="4"
+                            Height="{Binding Source={RelativeSource Self}, Path=WidthRequest}"
+                            ColumnSpacing="4"
+                            ItemsSource="{Binding Fields}"
+                            CommandParameter="{Binding .}"
+                            Command="{Binding TileClickCommand}"
+                            IsClippedToBounds="False">
+            </views:GridView>
+        </Frame>
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -45,24 +64,5 @@
                    Text="{Binding OutputText}"/>
         </Grid>
 
-        <ActivityIndicator Grid.Row="1" 
-                           IsRunning="{Binding IsBusy}"
-                           IsVisible="{Binding IsBusy}"/>
-
-        <Frame BackgroundColor="Black"
-               IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBooleanConverter}}"
-               HorizontalOptions="CenterAndExpand"
-               VerticalOptions="CenterAndExpand"
-               Padding="10"
-               Grid.Row="1">
-            <views:GridView RowSpacing="4"
-                            Height="{Binding Source={RelativeSource Self}, Path=WidthRequest}"
-                            ColumnSpacing="4"
-                            ItemsSource="{Binding Fields}"
-                            CommandParameter="{Binding .}"
-                            Command="{Binding TileClickCommand}"
-                            IsClippedToBounds="False">
-            </views:GridView>
-        </Frame>
     </Grid>
 </ContentPage>

@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Juventus.SOM.Sudoku.Android
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Juventus.SOM.Sudoku.iOS", "Juventus.SOM.Sudoku\Juventus.SOM.Sudoku.iOS\Juventus.SOM.Sudoku.iOS.csproj", "{1FE19FFB-3CD6-47AA-8977-89724675806B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Juventus.SOM.Sudoku", "Juventus.SOM.Sudoku\Juventus.SOM.Sudoku\Juventus.SOM.Sudoku.csproj", "{E0C1A2F9-7342-4AF4-933D-7BD1BC2414A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Juventus.SOM.Sudoku", "Juventus.SOM.Sudoku\Juventus.SOM.Sudoku\Juventus.SOM.Sudoku.csproj", "{E0C1A2F9-7342-4AF4-933D-7BD1BC2414A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Juventus.SOM.Sudoku.Test", "Juventus.SOM.Sudoku.Test\Juventus.SOM.Sudoku.Test.csproj", "{5B413DAF-1199-40CA-A3BA-F9E8D8A86B7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,18 @@ Global
 		{E0C1A2F9-7342-4AF4-933D-7BD1BC2414A3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{E0C1A2F9-7342-4AF4-933D-7BD1BC2414A3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{E0C1A2F9-7342-4AF4-933D-7BD1BC2414A3}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{5B413DAF-1199-40CA-A3BA-F9E8D8A86B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B413DAF-1199-40CA-A3BA-F9E8D8A86B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B413DAF-1199-40CA-A3BA-F9E8D8A86B7C}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{5B413DAF-1199-40CA-A3BA-F9E8D8A86B7C}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{5B413DAF-1199-40CA-A3BA-F9E8D8A86B7C}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{5B413DAF-1199-40CA-A3BA-F9E8D8A86B7C}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{5B413DAF-1199-40CA-A3BA-F9E8D8A86B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B413DAF-1199-40CA-A3BA-F9E8D8A86B7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B413DAF-1199-40CA-A3BA-F9E8D8A86B7C}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{5B413DAF-1199-40CA-A3BA-F9E8D8A86B7C}.Release|iPhone.Build.0 = Release|Any CPU
+		{5B413DAF-1199-40CA-A3BA-F9E8D8A86B7C}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{5B413DAF-1199-40CA-A3BA-F9E8D8A86B7C}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
