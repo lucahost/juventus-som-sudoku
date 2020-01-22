@@ -26,7 +26,10 @@ namespace Juventus.SOM.Sudoku.Test
 
             for (int i = 0; i < 81; i++)
             {
-                var field = new Field(i, i, i);
+                var field = new Field(i, i, i)
+                {
+                    Predefined = false
+                };
                 fields.Add(field);
             }
         }

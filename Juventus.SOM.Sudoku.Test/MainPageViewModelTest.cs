@@ -18,6 +18,16 @@ namespace Juventus.SOM.Sudoku.Test
         public void TestInitialize()
         {
             TestSetup();
+
+            sudokuFieldLoadedEventMock.Setup(
+                 x =>
+                 x.Subscribe(
+                 It.IsAny<Action<List<Field>>>(),
+                 It.IsAny<ThreadOption>(),
+                 It.IsAny<bool>(),
+                 It.IsAny<Predicate<List<Field>>>()))
+                 .Callback<Action<List<Field>>, ThreadOption, bool, Predicate<List<Field>>>(
+                 (e, t, b, p) => fieldsInitializedCallback = e);
         }
 
 
@@ -27,32 +37,61 @@ namespace Juventus.SOM.Sudoku.Test
         }
 
         [TestMethod]
-        public void MainPageViewModel_GivenEmptyViewModel_WhenListIsLoaded_ListIsInitialized()
+        public void MainPageViewModel_GivenEmptyViewModel_WhenReloadCommandIsClicked_ListIsInitialized()
         {
-            sudokuFieldLoadedEventMock.Setup(
-             x =>
-             x.Subscribe(
-             It.IsAny<Action<List<Field>>>(),
-             It.IsAny<ThreadOption>(),
-             It.IsAny<bool>(),
-             It.IsAny<Predicate<List<Field>>>()))
-             .Callback<Action<List<Field>>, ThreadOption, bool, Predicate<List<Field>>>(
-             (e, t, b, p) => fieldsInitializedCallback = e);
-
-
             GivenEmptyViewModel();
 
             viewModel.ReloadCommand.Execute();
-
             WhenFieldInitializedIsReceived(fields);
 
             Assert.IsNotNull(viewModel.Fields);
+        }
+
+        [TestMethod]
+        public void MainPageViewModel_GivenNoEntryChanged_WhenValidateCommandIsClicked_TextChanges()
+        {
+            GivenEmptyViewModel();
+            viewModel.ReloadCommand.Execute();
+            WhenFieldInitializedIsReceived(fields);
+
+            viewModel.ValidateCommand.Execute();
+
+            Assert.AreNotEqual(viewModel.OutputText, "");
+        }
+
+        [TestMethod]
+        public void MainPageViewModel_GivenNotCompleteFields_WhenValidateCommandIsClicked_TextChanges()
+        {
+            GivenEmptyViewModel();
+            viewModel.ReloadCommand.Execute();
+            fields[1].Value = -1;
+            WhenFieldInitializedIsReceived(fields);
+
+            viewModel.ValidateCommand.Execute();
+
+            Assert.AreEqual(true, viewModel.OutputText.Contains("Nicht alle Felder"));
+        }
+
+
+        [TestMethod]
+        public void MainPageViewModel_GivenIncorrectField_WhenValidateCommandIsClicked_TextChanges()
+        {
+            GivenEmptyViewModel();
+            viewModel.ReloadCommand.Execute();
+            fields[20].X = 10;
+            fields[20].Value = 10;
+            fields[21].X = 10;
+            fields[21].Value = 10;
+            WhenFieldInitializedIsReceived(fields);
+
+            viewModel.ValidateCommand.Execute();
+
+            Assert.AreEqual(true, viewModel.OutputText.Contains("Du hast eine ungültige"));
         }
 
         private void WhenFieldInitializedIsReceived(List<Field> fields)
         {
             fieldsInitializedCallback.Invoke(fields);
         }
-
     }
 }
